@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>John's Profile: Day & Night Theme</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- sky, stars and the sun/moon sit behind everything and don't scroll -->
+  <div class="sky" id="sky"></div>
+  <div class="stars" id="stars"></div>
+  <div class="orb" id="orb"></div>
+
+  <div class="lockscreen">
+    <!-- clock + date at the top don't move like a real lockscreen -->
+    <header class="clock-wrap">
+      <div class="date" id="date">Monday, January 1</div>
+      <div class="time" id="time">3:00</div>
+    </header>
+
+    <!-- insta + linkedin down the bottom where the torch/camera would be -->
+    <div class="dock">
+      <a class="dock-btn" href="https://www.instagram.com/johnwwu_/" target="_blank" title="Instagram">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.7.07-.9.04-1.4.2-1.7.32-.43.17-.73.36-1.05.68-.32.32-.51.62-.68 1.05-.12.3-.28.8-.32 1.7C3.2 8.5 3.2 8.9 3.2 12s0 3.5.07 4.7c.04.9.2 1.4.32 1.7.17.43.36.73.68 1.05.32.32.62.51 1.05.68.3.12.8.28 1.7.32 1.2.07 1.6.07 4.7.07s3.5 0 4.7-.07c.9-.04 1.4-.2 1.7-.32.43-.17.73-.36 1.05-.68.32-.32.51-.62.68-1.05.12-.3.28-.8.32-1.7.07-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.04-.9-.2-1.4-.32-1.7a2.8 2.8 0 0 0-.68-1.05 2.8 2.8 0 0 0-1.05-.68c-.3-.12-.8-.28-1.7-.32C15.5 4 15.1 4 12 4Zm0 3.06A4.94 4.94 0 1 1 12 17a4.94 4.94 0 0 1 0-9.88Zm0 1.8a3.14 3.14 0 1 0 0 6.28 3.14 3.14 0 0 0 0-6.28Zm5.13-.44a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0Z"/></svg>
+      </a>
+      <a class="dock-btn" href="https://www.linkedin.com/in/john-wu-347845334/" target="_blank" title="LinkedIn">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.75-2.05 4 0 4.75 2.63 4.75 6.05V21h-4v-5.35c0-1.28-.02-2.92-1.78-2.92-1.78 0-2.05 1.4-2.05 2.83V21H9V9Z"/></svg>
+      </a>
+    </div>
+
+    <!-- scroll notif that fades once you start moving down -->
+    <div class="hint" id="hint">
+      <span>start scrolling!</span>
+      <span class="chevron">⌃</span>
+    </div>
+  </div>
+ 
+  <!-- notifications here and show up as you scroll -->
+  <main class="scroll">
+
+    <!-- empty space up top so the first notif isn't jammed under the clock -->
+    <div class="spacer"></div>
+
+    <!-- morning: still asleep -->
+    <section class="chapter">
+      <div class="notif" data-title="Welcome"
+        data-body="Hi, I'm John. Welcome to my website! Click on the notifications to learn more about me!">
+        <div class="notif-icon" style="background:#333">👋</div>
+        <div class="notif-text"><b>Welcome</b><span>Hi, I'm John! Tap to start</span></div>
+      </div>
+      <div class="notif" data-title="Just sleeping"
+        data-body="My sleep schedule has been cooked since first year. I don't believe in breakfast or morning classes 😆">
+        <div class="notif-icon" style="background:#4a4a6a">😴</div>
+        <div class="notif-text"><b>Just sleeping</b><span>do not disturb</span></div>
+      </div>
+    </section>
+
+    <!-- midday: degree info + dev experience -->
+    <section class="chapter">
+      <div class="notif" data-title="My degree"
+        data-body="I'm a 4th year studying economics and computer science.&#10;&#10;My favourite comp course (so far) is COMP3121 surprisingly, with COMP2041 a close second.&#10;&#10;I'm taking ethics, COMP3411, and COMP9417 in Term 3.">
+        <div class="notif-icon" style="background:#c9a227">🎓</div>
+        <div class="notif-text"><b>My degree</b><span>4th year, econ + CS @ UNSW</span></div>
+      </div>
+      <div class="notif" data-title="Dev / project experience"
+        data-body="None 🥀 (that's why I'm applying for tp).">
+        <div class="notif-icon" style="background:#d51b1b">💻</div>
+        <div class="notif-text"><b>Dev / project experience</b><span>None 🥀</span></div>
+      </div>
+    </section>
+
+    <!-- daytime hobbies: pictures embedded so content is in script.js -->
+    <section class="chapter">
+      <div class="notif" data-title="Hobbies (during the day)"
+        data-body="__DAY_HOBBIES__">
+        <div class="notif-icon" style="background:#2e8b57">🎣</div>
+        <div class="notif-text"><b>Hobbies (daytime)</b><span>fishing, snowboarding, eating...</span></div>
+      </div>
+    </section>
+
+    <!-- evening: fun facts notif -->
+    <section class="chapter">
+      <div class="notif" data-title="Fun facts about me"
+        data-body="• I failed my driving test 4 times&#10;• My favourite struggle meal is rice, crispy seaweed, tuna in oil, and a bit of mayo on top&#10;• My biggest pet peeve is when someone walks or drives especially slow">
+        <div class="notif-icon" style="background:#d2691e">☝️</div>
+        <div class="notif-text"><b>Fun facts about me</b></div>
+      </div>
+    </section>
+
+    <!-- night hobbies: badminton video embed is in script.js -->
+    <section class="chapter">
+      <div class="notif" data-title="Hobbies again 😆 (but at night)"
+        data-body="__BADMINTON__">
+        <div class="notif-icon" style="background:#2846cd">🏸</div>
+        <div class="notif-text"><b>Hobbies again 😆 (nighttime)</b><span>badminton</span></div>
+      </div>
+    </section>
+
+    <!-- late night + end note -->
+    <section class="chapter">
+      <div class="notif" data-title="Late night haps"
+        data-body="• I'm usually doomscrolling in bed before sleeping, sometimes I wake up with my phone on my face&#10;• Roblox games with friends; my favourite is probably the Roblox version of Pico Park&#10;• Closer to the end of term, I'll be studying or working through an assignment&#10;• Lately I've started the NeetCode 150 and am aiming to finish at least one per day">
+        <div class="notif-icon" style="background:#2b2b4a">🌙</div>
+        <div class="notif-text"><b>Late night haps</b><span>doomscrolling, Roblox, NeetCode...</span></div>
+      </div>
+      <div class="end-note">that's my day, thanks for scrolling ✌️</div>
+    </section>
+
+    <div class="spacer"></div>
+  </main>
+
+  <!-- popup that opens when you tap a notif -->
+  <div class="pop" id="pop">
+    <div class="pop-card" id="pop-card">
+      <button class="pop-close" id="pop-close">✕</button>
+      <h3 id="pop-title"></h3>
+      <div id="pop-body"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

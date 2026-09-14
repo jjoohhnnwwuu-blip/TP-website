@@ -1,0 +1,178 @@
+/* ===== Reset & base ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #fff;
+}
+
+/* ===== Fixed sky / orb / stars ===== */
+.sky {
+  position: fixed; inset: 0; z-index: -3;
+  background: linear-gradient(180deg, #0b1029 0%, #1a2350 55%, #2d3a6b 100%);
+  transition: background 0.25s linear;
+}
+.stars {
+  position: fixed; inset: 0; z-index: -2;
+  opacity: 0; transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.stars::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1.4px 1.4px at 20% 15%, #fff, transparent),
+    radial-gradient(1px 1px at 45% 8%, #fff, transparent),
+    radial-gradient(1.6px 1.6px at 70% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 85% 12%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 30% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 60% 35%, #fff, transparent),
+    radial-gradient(1.4px 1.4px at 90% 40%, #fff, transparent),
+    radial-gradient(1px 1px at 12% 45%, #fff, transparent),
+    radial-gradient(1.3px 1.3px at 50% 22%, #fff, transparent);
+}
+.orb {
+  position: fixed; z-index: -2;
+  left: 50%; top: 18%;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: #FDB813;
+  box-shadow: 0 0 60px 20px rgba(253,184,19,0.35);
+  transform: translateX(-50%);
+  transition: top 0.25s linear, background 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ===== Fixed lockscreen chrome ===== */
+.lockscreen {
+  position: fixed; inset: 0; z-index: 5;
+  pointer-events: none;
+}
+.clock-wrap {
+  position: absolute; top: 6vh; left: 0; right: 0;
+  text-align: center;
+}
+.date { font-size: 17px; font-weight: 500; opacity: 0.95; margin-bottom: 2px; }
+.time {
+  font-size: clamp(64px, 20vw, 92px);
+  font-weight: 600; line-height: 1; letter-spacing: -2px;
+}
+
+.dock {
+  position: absolute; bottom: 5vh; left: 0; right: 0;
+  display: flex; justify-content: space-between;
+  padding: 0 14vw;
+}
+.dock-btn {
+  pointer-events: auto;
+  width: 54px; height: 54px; border-radius: 50%;
+  background: rgba(0,0,0,0.28);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; text-decoration: none;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+.dock-btn:hover { transform: scale(1.08); background: rgba(0,0,0,0.4); }
+.dock-btn:active { transform: scale(0.94); }
+
+.hint {
+  position: absolute; bottom: 15vh; left: 0; right: 0;
+  text-align: center; font-size: 13px; opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+.hint .chevron { display: block; font-size: 20px; animation: bob 1.6s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+/* ===== Scrolling content ===== */
+.scroll { position: relative; z-index: 3; }
+.spacer { height: 92vh; }
+.chapter {
+  min-height: 82vh;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 12px;
+  padding: 0 16px;
+  max-width: 460px; margin: 0 auto;
+}
+
+/* ===== Notifications ===== */
+.notif {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 0.5px solid rgba(255,255,255,0.25);
+  border-radius: 18px;
+  padding: 12px 14px;
+  cursor: pointer;
+  color: #fff;
+  /* arrival animation state */
+  opacity: 0; transform: translateY(24px) scale(0.96);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2,0.7,0.3,1), background 0.2s ease;
+}
+.notif.show { opacity: 1; transform: translateY(0) scale(1); }
+.notif:hover { background: rgba(255,255,255,0.3); }
+.notif:active { transform: scale(0.98); }
+
+.notif-icon {
+  flex: 0 0 auto;
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.notif-text { display: flex; flex-direction: column; line-height: 1.35; min-width: 0; }
+.notif-text b { font-size: 14px; font-weight: 600; }
+.notif-text span { font-size: 13px; opacity: 0.9; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.end-note {
+  text-align: center; font-size: 14px; opacity: 0.8;
+  margin-top: 20px;
+}
+
+/* ===== Popup overlay ===== */
+.pop {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  display: none; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; transition: opacity 0.25s ease;
+}
+.pop.open { display: flex; opacity: 1; }
+.pop-card {
+  position: relative;
+  background: rgba(0, 0, 0, 0.96);
+  border: 0.5px solid rgba(255,255,255,0.15);
+  border-radius: 22px;
+  padding: 26px 22px 22px;
+  max-width: 380px; width: 100%;
+  max-height: 80vh; overflow-y: auto;
+  transform: scale(0.92); transition: transform 0.25s cubic-bezier(0.2,0.7,0.3,1);
+}
+.pop.open .pop-card { transform: scale(1); }
+.pop-card h3 { font-size: 19px; margin-bottom: 12px; }
+.pop-card #pop-body { font-size: 15px; line-height: 1.6; color: #eaeaea; white-space: pre-line; }
+.pop-card #pop-body p { margin: 0 0 10px; }
+.pop-img {
+  width: 100%; border-radius: 12px; display: block;
+  margin: 0 0 16px; background: rgba(255,255,255,0.06);
+}
+.pop-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255,255,255,0.14); border: none; color: #fff;
+  font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.pop-close:hover { background: rgba(255,255,255,0.24); }
+
+/* media inside popup */
+.pop-media {
+  margin-top: 14px; border-radius: 12px; overflow: hidden;
+  background: rgba(255,255,255,0.06);
+}
+.pop-media iframe { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
